@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 import proxy.imp.AOPMethod;
 
 public class AOPHandle implements InvocationHandler{
-	//±£´æ¶ÔÏó
+	//ä¿å­˜å¯¹è±¡
 	private AOPMethod method;
 	private Object o;
 	public AOPHandle(Object o,AOPMethod method) {
@@ -14,21 +14,21 @@ public class AOPHandle implements InvocationHandler{
 		this.method=method;
 	}
 	/**
-	 * Õâ¸ö·½·¨»á×Ô¶¯µ÷ÓÃ,Java¶¯Ì¬´úÀí»úÖÆ
-	 * »á´«ÈëÏÂÃæÊÇ¸ö²ÎÊı
-	 * @param Object proxy	´úÀí¶ÔÏóµÄ½Ó¿Ú,²»Í¬ÓÚ¶ÔÏó
-	 * @param Method method	±»µ÷ÓÃ·½·¨
-	 * @param Object[] args	·½·¨²ÎÊı
-	 * ²»ÄÜÊ¹ÓÃinvokeÊ±Ê¹ÓÃproxy×÷Îª·´Éä²ÎÊıÊ±,ÒòÎª´úÀí¶ÔÏóµÄ½Ó¿Ú,²»Í¬ÓÚ¶ÔÏó
-	 * ÕâÖÖ´úÀí»úÖÆÊÇÃæÏò½Ó¿Ú£¬¶ø²»ÊÇÃæÏòÀàµÄ
+	 * è¿™ä¸ªæ–¹æ³•ä¼šè‡ªåŠ¨è°ƒç”¨,JavaåŠ¨æ€ä»£ç†æœºåˆ¶
+	 * ä¼šä¼ å…¥ä¸‹é¢æ˜¯ä¸ªå‚æ•°
+	 * @param Object proxy	ä»£ç†å¯¹è±¡çš„æ¥å£,ä¸åŒäºå¯¹è±¡
+	 * @param Method method	è¢«è°ƒç”¨æ–¹æ³•
+	 * @param Object[] args	æ–¹æ³•å‚æ•°
+	 * ä¸èƒ½ä½¿ç”¨invokeæ—¶ä½¿ç”¨proxyä½œä¸ºåå°„å‚æ•°æ—¶,å› ä¸ºä»£ç†å¯¹è±¡çš„æ¥å£,ä¸åŒäºå¯¹è±¡
+	 * è¿™ç§ä»£ç†æœºåˆ¶æ˜¯é¢å‘æ¥å£ï¼Œè€Œä¸æ˜¯é¢å‘ç±»çš„
 	 **/
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		Object ret=null;
-		//ĞŞ¸ÄµÄµØ·½ÔÚÕâÀïÅ¶
+		//ä¿®æ”¹çš„åœ°æ–¹åœ¨è¿™é‡Œå“¦
 		this.method.before(proxy, method, args);
 		ret=method.invoke(o, args);
-		//ĞŞ¸ÄµÄµØ·½ÔÚÕâÀïÅ¶
+		//ä¿®æ”¹çš„åœ°æ–¹åœ¨è¿™é‡Œå“¦
 		this.method.after(proxy, method, args);
 		return ret;
 	}
